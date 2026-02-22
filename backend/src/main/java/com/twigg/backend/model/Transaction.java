@@ -37,7 +37,6 @@ public class Transaction {
     private LocalDate updatedAt;
 
     public Transaction(){
-
     }
     public Long getId(){
         return id;
