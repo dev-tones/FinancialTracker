@@ -1,5 +1,7 @@
 package com.twigg.backend.dto;
 
-public class CategoryResponse {
-    
-}
+public record CategoryResponse(
+Long id, 
+String name, 
+String type
+) {}
