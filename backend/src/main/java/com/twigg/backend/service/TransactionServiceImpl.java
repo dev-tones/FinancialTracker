@@ -59,14 +59,24 @@ public class TransactionServiceImpl implements TransactionService {
     //helper method
     private TransactionResponse mapToResponse(Transaction transaction){
         //create entity
-        TransactionResponse response = new TransactionResponse();
-        response.setId(transaction.getId());
-        response.setAmount(transaction.getAmount());
-        response.setType(transaction.getType());
-        response.setDate(transaction.getDate());
-        response.setCategoryId(transaction.getCategoryId());
-        response.setDescription(transaction.getDescription());
-        return response;
+
+        //.        -------CHANGED DUE TO RESPONSE RECORD-----
+        // TransactionResponse response = new TransactionResponse();
+        // response.setId(transaction.getId());
+        // response.setAmount(transaction.getAmount());
+        // response.setType(transaction.getType());
+        // response.setDate(transaction.getDate());
+        // response.setCategoryId(transaction.getCategoryId());
+        // response.setDescription(transaction.getDescription());
+        // return response;
+        return new TransactionResponse(
+            transaction.getId(),
+            transaction.getDate(),
+            transaction.getAmount(),
+            transaction.getType(),
+            transaction.getCategoryId(),
+            transaction.getDescription()
+        );
 
 
     }
