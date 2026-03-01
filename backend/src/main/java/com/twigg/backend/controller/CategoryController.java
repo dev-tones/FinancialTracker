@@ -11,6 +11,10 @@ import com.twigg.backend.service.CategoryService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+
+
 
 @RestController
 @RequestMapping("/category")
@@ -20,12 +24,21 @@ public class CategoryController {
     public CategoryController(CategoryService categoryService){
         this.categoryService = categoryService;
     }
+
     @PostMapping
     public CategoryResponse createCategory(@RequestBody CreateCategoryRequest request) {
         return categoryService.createCategory(request);
     }
+    
     @GetMapping
     public List<CategoryResponse> getAllCategories() {
         return categoryService.getAllCategories();
     }
+
+    @GetMapping("/{id}")
+    public CategoryResponse getCategoryById(@PathVariable Long id) {
+        return categoryService.getCategoryById(id);
+    }
+    
+
 }

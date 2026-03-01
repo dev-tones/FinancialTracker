@@ -1,5 +1,6 @@
 package com.twigg.backend.service;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,12 @@ public class CategoryServiceImpl implements CategoryService {
             responses.add(mapToCategory(x));
         }
         return responses;
+    }
+    @Override
+    public CategoryResponse getCategoryById(Long categoryId){
+        Category categoryById = categoryRepository.findById(categoryId)
+        .orElseThrow(() -> new RuntimeException("Category not found"));
+        return mapToCategory(categoryById);
     }
 
     private CategoryResponse mapToCategory(Category category){
