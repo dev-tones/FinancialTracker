@@ -3,6 +3,7 @@ package com.twigg.backend.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.twigg.backend.dto.CreateCategoryRequest;
@@ -31,7 +32,10 @@ public class CategoryController {
     }
     
     @GetMapping
-    public List<CategoryResponse> getAllCategories() {
+    public List<CategoryResponse> getAllCategories(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "20") int pageSize
+    ) {
         return categoryService.getAllCategories();
     }
 
