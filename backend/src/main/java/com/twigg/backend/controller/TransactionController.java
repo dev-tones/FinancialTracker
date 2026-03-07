@@ -1,6 +1,7 @@
 package com.twigg.backend.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.twigg.backend.service.TransactionService;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/transaction")
+@RequestMapping("/transactions")
 public class TransactionController {
 
     private final TransactionService transactionService;
@@ -28,7 +29,9 @@ public class TransactionController {
         return response;
     }
     @GetMapping
-    public List<TransactionResponse> getAllTransactions() {
+    public List<TransactionResponse> getAllTransactions(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "20") int pageSize) {
         List<TransactionResponse> transactionResponse = transactionService.getAllTransactions();
         return transactionResponse;
     }
