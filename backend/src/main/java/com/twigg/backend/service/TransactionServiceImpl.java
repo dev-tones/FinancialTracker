@@ -4,10 +4,14 @@ import com.twigg.backend.repository.TransactionRepository;
 import com.twigg.backend.dto.CreateTransactionRequest;
 import com.twigg.backend.dto.TransactionResponse;
 import com.twigg.backend.model.Transaction;
+
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 //import java.util.stream.Collectors;
 import java.time.LocalDate;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,15 +48,28 @@ public class TransactionServiceImpl implements TransactionService {
 
 
     @Override
-    public List<TransactionResponse> getAllTransactions(){
+    public List<TransactionResponse> getAllTransactions(int page, int pageSize){
 
-        List<Transaction> transactions = transactionRepository.findAll();
-        List<TransactionResponse> responses = new ArrayList<>();
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Transaction> transactions = transactionRepository.findAll(pageable);
 
-        for (Transaction tx : transactions){
-            responses.add(mapToResponse(tx));
-        }
-        return responses;
+        // List<Transaction> transactions = transactionRepository.findAll();
+        // List<TransactionResponse> responses = new ArrayList<>();
+
+        // for (Transaction tx : transactions){
+        //     responses.add(mapToResponse(tx));
+        // }
+        return transactions
+        .stream()
+        .map(this::mapToResponse)
+        .toList();
+    }
+
+    @Override
+    public TransactionResponse getTransactionById(Long transactionId){
+        Transaction transactionById = transactionRepository.findById(transactionId)
+            .orElseThrow(() -> new RuntimeException("Transaction not found"));
+            return mapToResponse(transactionById);
     }
 
     //Take a transaction copy fields into a TransactionResponse
@@ -77,11 +94,6 @@ public class TransactionServiceImpl implements TransactionService {
             transaction.getCategoryId(),
             transaction.getDescription()
         );
-    }
-    public TransactionResponse getTransactionById(Long transactionId){
-        Transaction transactionById = transactionRepository.findById(transactionId)
-            .orElseThrow(() -> new RuntimeException("Transaction not found"));
-            return mapToResponse(transactionById);
     }
 }
     

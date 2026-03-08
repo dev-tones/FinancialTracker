@@ -12,7 +12,7 @@ public interface TransactionService {
 
     public TransactionResponse createTransaction(CreateTransactionRequest request);
 
-    public List<TransactionResponse> getAllTransactions();
+    public List<TransactionResponse> getAllTransactions(int page, int pageSize);
 
     public TransactionResponse getTransactionById(Long transactionId);
 
