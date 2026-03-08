@@ -77,8 +77,11 @@ public class TransactionServiceImpl implements TransactionService {
             transaction.getCategoryId(),
             transaction.getDescription()
         );
-
-
+    }
+    public TransactionResponse getTransactionById(Long transactionId){
+        Transaction transactionById = transactionRepository.findById(transactionId)
+            .orElseThrow(() -> new RuntimeException("Transaction not found"));
+            return mapToResponse(transactionById);
     }
 }
     
