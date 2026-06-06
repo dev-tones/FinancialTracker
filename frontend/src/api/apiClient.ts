@@ -1,5 +1,5 @@
 const API_VERSION = "v1";
-export const BASE_URL = `api/${API_VERSION}`;
+export const BASE_URL = `/api/${API_VERSION}`;
 
 // A helper to make fetching cleaner
 export const apiFetch = (

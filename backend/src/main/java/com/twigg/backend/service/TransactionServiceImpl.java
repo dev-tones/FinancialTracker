@@ -36,8 +36,7 @@ public class TransactionServiceImpl implements TransactionService {
         tx.setDescription(request.getDescription());
 
         // 3. Set timestamps
-        tx.setCreatedAt(LocalDate.now());
-        tx.setUpdatedAt(LocalDate.now());
+        // Hibernate handles setting the timestamps with the model annotations
 
         // 4. Save
         Transaction saved = transactionRepository.save(tx);

@@ -1,6 +1,7 @@
 package com.twigg.backend.model;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.time.LocalDate;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,10 +32,10 @@ public class Transaction {
     private String description;
 
     @CreationTimestamp
-    private LocalDate createdAt;
+    private OffsetDateTime createdAt;
 
     @UpdateTimestamp
-    private LocalDate updatedAt;
+    private OffsetDateTime updatedAt;
 
     public Transaction(){
     }
@@ -74,16 +75,10 @@ public class Transaction {
     public void setDescription(String description){
         this.description = description;
     }
-    public LocalDate getCreatedAt(){
+    public OffsetDateTime getCreatedAt(){
         return createdAt;
     }
-    public void setCreatedAt(LocalDate createdAt){
-        this.createdAt = createdAt;
-    }
-    public LocalDate getUpdatedAt(){
+    public OffsetDateTime getUpdatedAt(){
         return updatedAt;
-    }
-    public void setUpdatedAt(LocalDate updatedAt){
-        this.updatedAt = updatedAt;
     }
 }
