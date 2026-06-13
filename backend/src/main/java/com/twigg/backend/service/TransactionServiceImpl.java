@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 //import java.util.stream.Collectors;
-import java.time.LocalDate;
+// import java.time.LocalDate;
 // import java.util.ArrayList;
 import java.util.List;
 
@@ -51,13 +51,6 @@ public class TransactionServiceImpl implements TransactionService {
 
         Pageable pageable = PageRequest.of(page, pageSize);
         Page<Transaction> transactions = transactionRepository.findAll(pageable);
-
-        // List<Transaction> transactions = transactionRepository.findAll();
-        // List<TransactionResponse> responses = new ArrayList<>();
-
-        // for (Transaction tx : transactions){
-        //     responses.add(mapToResponse(tx));
-        // }
         return transactions
         .stream()
         .map(this::mapToResponse)
