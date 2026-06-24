@@ -2,29 +2,39 @@ package com.twigg.backend.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
 
-public class UpdateUserRequest {
 
-  
+public class UserCreateRequest {
+
+    @NotBlank
     private String userName;
-   
+
+    @NotBlank
     private String firstName;
-  
+
+    @NotBlank
     private String lastName;
-    @Size(min=8, message="Password must be at least 8 characters.")
+
+    @Size(min=8)
+    @NotBlank
     private String password;
-    @Email(message="Please provide a valid email address.")
+
+    @Email
+    @NotBlank
     private String email;
     
     private String phone;
 
+    public UserCreateRequest(){
+    }  
     public String getUserName(){
         return userName;
     }
     public void setUserName(String userName){
         this.userName = userName;
     }
-       public String getFirstName(){
+    public String getFirstName(){
         return firstName;
     }
     public void setFirstName(String firstName){

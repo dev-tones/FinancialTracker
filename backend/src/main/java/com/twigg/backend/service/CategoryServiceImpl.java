@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.twigg.backend.dto.CategoryResponse;
-import com.twigg.backend.dto.CreateCategoryRequest;
+import com.twigg.backend.dto.CategoryCreateRequest;
 import com.twigg.backend.model.Category;
 import com.twigg.backend.repository.CategoryRepository;
 
@@ -18,7 +18,7 @@ public class CategoryServiceImpl implements CategoryService {
         this.categoryRepository = categoryRepository;
     }
     @Override
-    public CategoryResponse createCategory(CreateCategoryRequest request){
+    public CategoryResponse createCategory(CategoryCreateRequest request){
         Category category = new Category();
         category.setName(request.getName());
         category.setType(request.getType());

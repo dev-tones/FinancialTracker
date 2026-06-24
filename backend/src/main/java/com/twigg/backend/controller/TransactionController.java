@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.twigg.backend.service.TransactionService;
-import com.twigg.backend.dto.CreateTransactionRequest;
+import com.twigg.backend.dto.TransactionCreateRequest;
 import com.twigg.backend.dto.TransactionResponse;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
     @PostMapping
-    public TransactionResponse createTransaction(@RequestBody CreateTransactionRequest request) {
+    public TransactionResponse createTransaction(@RequestBody TransactionCreateRequest request) {
         TransactionResponse response = transactionService.createTransaction(request);
         return response;
     }

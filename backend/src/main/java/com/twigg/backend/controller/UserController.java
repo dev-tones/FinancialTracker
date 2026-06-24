@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.twigg.backend.dto.CreateUserRequest;
-import com.twigg.backend.dto.UpdateUserRequest;
+import com.twigg.backend.dto.UserCreateRequest;
+import com.twigg.backend.dto.UserUpdateRequest;
 import com.twigg.backend.dto.UserResponse;
 import com.twigg.backend.service.UserService;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -33,7 +33,7 @@ public class UserController {
     
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserResponse createUser(@RequestBody CreateUserRequest request) {
+    public UserResponse createUser(@RequestBody UserCreateRequest request) {
         UserResponse response = userService.createUser(request);
         return response;
     }
@@ -62,7 +62,7 @@ public class UserController {
 
     @PutMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserResponse updateUser(@PathVariable Long id, @RequestBody UpdateUserRequest request) {
+    public UserResponse updateUser(@PathVariable Long id, @RequestBody UserUpdateRequest request) {
         UserResponse response = userService.updateUser(id, request);
         return response;
     }

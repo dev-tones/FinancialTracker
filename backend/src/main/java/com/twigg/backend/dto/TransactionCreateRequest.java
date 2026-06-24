@@ -2,14 +2,14 @@ package com.twigg.backend.dto;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class CreateTransactionRequest {
+public class TransactionCreateRequest {
     private LocalDate date;
     private BigDecimal amount;
     private String type;
     private Long categoryId;
     private String description;
 
-    public CreateTransactionRequest() {
+    public TransactionCreateRequest() {
     }
     public LocalDate getDate(){
         return date;

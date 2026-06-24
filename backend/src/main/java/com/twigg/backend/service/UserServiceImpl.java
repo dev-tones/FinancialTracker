@@ -1,6 +1,7 @@
 package com.twigg.backend.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -11,8 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.twigg.backend.dto.CreateUserRequest;
-import com.twigg.backend.dto.UpdateUserRequest;
+import com.twigg.backend.dto.UserCreateRequest;
+import com.twigg.backend.dto.UserUpdateRequest;
 import com.twigg.backend.dto.UserResponse;
 import com.twigg.backend.model.User;
 import com.twigg.backend.repository.UserRepository;
@@ -28,7 +29,7 @@ public class UserServiceImpl {
         this.passwordEncoder = passwordEncoder;
     }
     
-    public UserResponse createUser(CreateUserRequest request){
+    public UserResponse createUser(UserCreateRequest request){
         User u = new User();
         u.setUserName(request.getUserName());
         u.setFirstName(request.getFirstName());
@@ -57,7 +58,7 @@ public class UserServiceImpl {
         return true;
     }
 
-    public UserResponse updateUser(Long id, UpdateUserRequest request){
+    public UserResponse updateUser(Long id, UserUpdateRequest request){
         User u = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("User not found. "));
         u.setUserName(request.getUserName());
         u.setFirstName(request.getFirstName());
@@ -70,10 +71,19 @@ public class UserServiceImpl {
         userRepository.save(u);
         return mapToResponse(u);
     }
+    public List<UserResponse> findByUserRole(String userRole){
+        List<User> u = userRepository.findByUserRole(userRole);
+        List<UserResponse> ur = new ArrayList<>();
+        for (User user : u) {
+            ur.add(mapToResponse(user));
+        }
+        return ur;
+    }
 
     public UserResponse mapToResponse(User user){
         return new UserResponse(
             user.getId(),
+            user.getUserRole(),
             user.getUserName(),
             user.getFirstName(),
             user.getLastName(),

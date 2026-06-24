@@ -1,10 +1,10 @@
 package com.twigg.backend.dto;
-public class CreateCategoryRequest {
+public class CategoryCreateRequest {
 
     private String name;
     private String type;
 
-    public CreateCategoryRequest(){
+    public CategoryCreateRequest(){
     }
     public String getName(){
         return name;

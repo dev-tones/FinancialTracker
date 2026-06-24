@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.twigg.backend.dto.CategoryResponse;
-import com.twigg.backend.dto.CreateCategoryRequest;
+import com.twigg.backend.dto.CategoryCreateRequest;
 import com.twigg.backend.service.CategoryService;
 
 
@@ -27,7 +27,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public CategoryResponse createCategory(@RequestBody CreateCategoryRequest request) {
+    public CategoryResponse createCategory(@RequestBody CategoryCreateRequest request) {
         return categoryService.createCategory(request);
     }
     

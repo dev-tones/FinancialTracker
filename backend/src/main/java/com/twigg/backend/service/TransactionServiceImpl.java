@@ -1,7 +1,7 @@
 package com.twigg.backend.service;
 
 import com.twigg.backend.repository.TransactionRepository;
-import com.twigg.backend.dto.CreateTransactionRequest;
+import com.twigg.backend.dto.TransactionCreateRequest;
 import com.twigg.backend.dto.TransactionResponse;
 import com.twigg.backend.model.Transaction;
 
@@ -23,7 +23,7 @@ public class TransactionServiceImpl implements TransactionService {
         this.transactionRepository = transactionRepository;
     }
     @Override
-    public TransactionResponse createTransaction(CreateTransactionRequest request){
+    public TransactionResponse createTransaction(TransactionCreateRequest request){
         // 1. Create entity
         Transaction tx = new Transaction();
 
