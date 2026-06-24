@@ -18,10 +18,9 @@ import com.twigg.backend.dto.UserResponse;
 import com.twigg.backend.model.User;
 import com.twigg.backend.repository.UserRepository;
 
-import jakarta.transaction.Transactional;
+
 @Service
-@Transactional
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder){

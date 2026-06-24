@@ -1,6 +1,9 @@
 package com.twigg.backend.service;
 
 import com.twigg.backend.repository.TransactionRepository;
+
+import jakarta.transaction.Transactional;
+
 import com.twigg.backend.dto.TransactionCreateRequest;
 import com.twigg.backend.dto.TransactionResponse;
 import com.twigg.backend.model.Transaction;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@Transactional
 public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;

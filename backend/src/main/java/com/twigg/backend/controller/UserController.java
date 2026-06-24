@@ -47,7 +47,7 @@ public class UserController {
         return response;
     }
 
-    @GetMapping
+    @GetMapping("/search")
     @ResponseStatus(HttpStatus.OK)
     public UserResponse findByEmail(@RequestParam String email){
         UserResponse response = userService.findByEmail(email);
