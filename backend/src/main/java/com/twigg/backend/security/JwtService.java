@@ -3,17 +3,17 @@ package com.twigg.backend.security;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 
@@ -24,7 +24,6 @@ public class JwtService {
     private String jwtSecret;
     @Value("${jwt.expiration}")
     private long expiration;
-    private static final Logger logger = LoggerFactory.getLogger(JwtService.class);
 
     private Key getSigningKey() {
     byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);
@@ -32,41 +31,48 @@ public class JwtService {
 }
 
     public String generateToken(String email){
-        String jwt = Jwts.builder()
+        Map<String, Object> claims = new HashMap<>();
+        return createToken(claims, email);
+    }
+
+    private String createToken(Map<String, Object> claims, String email) {
+        return Jwts.builder()
+        .setClaims(claims)
         .setSubject(email)
         .setIssuedAt(new Date())
         .setExpiration(new Date(System.currentTimeMillis() + expiration))
-        .signWith(getSigningKey())
+        .signWith(getSigningKey(), SignatureAlgorithm.HS256)
         .compact();
-        return jwt;
     }
-    public String extractEmail(String token){
-        Key key = getSigningKey();
-        Claims claims = Jwts.parserBuilder()
-        .setSigningKey(key)
+
+    private Claims extractAllClaims(String token){
+        return Jwts.parserBuilder()
+        .setSigningKey(getSigningKey())
         .build()
         .parseClaimsJws(token)
         .getBody();
-        return claims.getSubject();
     }
-    public boolean validateToken(String token){
-        Key key = getSigningKey();
-        try {
-            Jwts.parserBuilder()
-            .setSigningKey(key)
-            .build()
-            .parseClaimsJws(token)
-            .getBody();
-            return true;
-        } catch (ExpiredJwtException e) {
-            logger.error("❌ Token expired: " + e.getMessage());
-        } catch (UnsupportedJwtException e) {
-            logger.error("❌ Unsupported JWT: " + e.getMessage());
-        } catch (MalformedJwtException e) {
-            logger.error("❌ Malformed JWT: " + e.getMessage());
-        } catch (IllegalArgumentException e) {
-            logger.error("❌ Token is null or empty: " + e.getMessage());
-        }
-        return false;  
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
     }
+
+    private Boolean isTokenExpired(String token){
+        return extractExpiration(token).before(new Date());
+    }
+
+    public String extractEmail(String token){
+        return extractClaim(token, Claims::getSubject);
+    }
+
+    public Date extractExpiration(String token){
+        return extractClaim(token, Claims::getExpiration);
+    }
+
+    public boolean validateToken(String token, UserDetails userDetails){
+        final String email = extractEmail(token);
+        return (email.equals(userDetails.getUsername()) && !isTokenExpired(token)); 
+    }
+    
 }

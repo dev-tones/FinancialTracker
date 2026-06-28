@@ -1,5 +1,7 @@
 package com.twigg.backend.dto;
 
+import com.twigg.backend.model.UserRole;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
@@ -8,7 +10,7 @@ public class UserUpdateRequest {
   
     private String userName;
 
-    private String userRole;
+    private UserRole userRole;
    
     private String firstName;
   
@@ -26,10 +28,10 @@ public class UserUpdateRequest {
     public void setUserName(String userName){
         this.userName = userName;
     }
-    public String getUserRole(){
+    public UserRole getUserRole(){
         return userRole;
     }
-    public void setUserRole(String userRole){
+    public void setUserRole(UserRole userRole){
         this.userRole = userRole;
     }
     public String getFirstName(){

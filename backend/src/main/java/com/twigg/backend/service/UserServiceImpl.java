@@ -5,17 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.twigg.backend.dto.UserCreateRequest;
-import com.twigg.backend.dto.UserUpdateRequest;
 import com.twigg.backend.dto.UserResponse;
+import com.twigg.backend.dto.UserUpdateRequest;
 import com.twigg.backend.model.User;
+import com.twigg.backend.model.UserRole;
 import com.twigg.backend.repository.UserRepository;
 
 
@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
     public UserResponse createUser(UserCreateRequest request){
         User u = new User();
         u.setUserName(request.getUserName());
+        u.setUserRole(UserRole.USER);
         u.setFirstName(request.getFirstName());
         u.setLastName(request.getLastName());
         u.setEmail(request.getEmail());
