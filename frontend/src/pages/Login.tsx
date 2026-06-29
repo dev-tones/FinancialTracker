@@ -28,6 +28,7 @@ function Login() {
       }
       const token = await response.text();
       localStorage.setItem("token", token);
+      localStorage.setItem("email", formData.email);
       navigate("/profile");
     } catch (err) {
       if (err instanceof Error) {
