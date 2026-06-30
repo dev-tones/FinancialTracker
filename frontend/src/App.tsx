@@ -1,6 +1,6 @@
-import Login from "./pages/Login";
-import Profile from "./pages/Profile";
-import Register from "./pages/Register";
+import LoginPage from "./pages/LoginPage";
+import ProfilePage from "./pages/ProfilePage";
+import RegisterPage from "./pages/RegisterPage";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function App() {
@@ -13,9 +13,9 @@ function App() {
       </nav>
 
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>
   );

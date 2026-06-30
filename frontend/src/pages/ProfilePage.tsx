@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import type { User } from "../types/User";
 
-function Profile() {
+function ProfilePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [tableData, setTableData] = useState<User>({
@@ -80,4 +80,4 @@ function Profile() {
     </table>
   );
 }
-export default Profile;
+export default ProfilePage;

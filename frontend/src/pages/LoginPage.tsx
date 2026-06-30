@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { Login } from "../types/Login";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function LoginPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -67,4 +67,4 @@ function Login() {
     </form>
   );
 }
-export default Login;
+export default LoginPage;

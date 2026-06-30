@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Register } from "../types/Register";
 
-function Register() {
+function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState<Register>({
@@ -109,4 +109,4 @@ function Register() {
     </form>
   );
 }
-export default Register;
+export default RegisterPage;
