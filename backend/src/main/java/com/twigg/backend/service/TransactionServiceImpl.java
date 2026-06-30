@@ -12,11 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-//import java.util.stream.Collectors;
-// import java.time.LocalDate;
-// import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -64,13 +59,13 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionResponse> getReoccurring(boolean reoccurring){
-        List<TransactionResponse> tr = new ArrayList<>();
-        List<Transaction> t = transactionRepository.findByReoccurring(true);
-        for (Transaction transaction : t) {
-            tr.add(mapToResponse(transaction));
-        }
-        return tr;
+    public List<TransactionResponse> getReoccurring(int page, int pageSize){
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Transaction> transactions = transactionRepository.findByReoccurring(true, pageable);
+        return transactions
+        .stream()
+        .map(this::mapToResponse)
+        .toList();
     }
 
     @Override

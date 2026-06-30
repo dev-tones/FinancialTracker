@@ -16,6 +16,6 @@ public interface TransactionService {
 
     public TransactionResponse getTransactionById(Long transactionId);
 
-    public List<TransactionResponse> getReoccurring(boolean reoccurring);
+    public List<TransactionResponse> getReoccurring(int page, int pageSize);
 
 }
