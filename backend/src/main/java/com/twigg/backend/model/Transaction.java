@@ -31,6 +31,8 @@ public class Transaction {
 
     private String description;
 
+    private boolean reoccurring;
+
     @CreationTimestamp
     private OffsetDateTime createdAt;
 
@@ -74,6 +76,12 @@ public class Transaction {
     }
     public void setDescription(String description){
         this.description = description;
+    }
+    public Boolean getReoccurring(){
+        return reoccurring;
+    }
+    public void setReoccurring(Boolean reoccurring){
+        this.reoccurring = reoccurring;
     }
     public OffsetDateTime getCreatedAt(){
         return createdAt;

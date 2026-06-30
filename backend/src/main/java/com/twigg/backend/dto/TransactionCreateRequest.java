@@ -8,6 +8,7 @@ public class TransactionCreateRequest {
     private String type;
     private Long categoryId;
     private String description;
+    private boolean reoccurring;
 
     public TransactionCreateRequest() {
     }
@@ -40,5 +41,11 @@ public class TransactionCreateRequest {
     }
     public void setDescription(String description){
         this.description = description;
+    }
+    public boolean getReoccurring(){
+        return reoccurring;
+    }
+    public void setIsReoccurring(boolean isReoccurring){
+        this.reoccurring = reoccurring;
     }
 }

@@ -9,5 +9,6 @@ public record TransactionResponse(
     BigDecimal amount,
     String type,
     Long categoryId,
-    String description
+    String description,
+    boolean reoccurring
 ) {}

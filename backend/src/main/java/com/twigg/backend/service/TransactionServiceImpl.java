@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 //import java.util.stream.Collectors;
 // import java.time.LocalDate;
 // import java.util.ArrayList;
@@ -62,6 +64,16 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
+    public List<TransactionResponse> getReoccurring(boolean reoccurring){
+        List<TransactionResponse> tr = new ArrayList<>();
+        List<Transaction> t = transactionRepository.findByReoccurring(true);
+        for (Transaction transaction : t) {
+            tr.add(mapToResponse(transaction));
+        }
+        return tr;
+    }
+
+    @Override
     public TransactionResponse getTransactionById(Long transactionId){
         Transaction transactionById = transactionRepository.findById(transactionId)
             .orElseThrow(() -> new RuntimeException("Transaction not found"));
@@ -88,7 +100,8 @@ public class TransactionServiceImpl implements TransactionService {
             transaction.getAmount(),
             transaction.getType(),
             transaction.getCategoryId(),
-            transaction.getDescription()
+            transaction.getDescription(),
+            transaction.getReoccurring()
         );
     }
 }

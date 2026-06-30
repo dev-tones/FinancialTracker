@@ -42,6 +42,12 @@ public class TransactionController {
        return transactionService.getTransactionById(id);
     }
 
+    @GetMapping("/reoccurring")
+    public List<TransactionResponse> getReoccurring(@RequestParam boolean reoccurring) {
+        List<TransactionResponse> tr = transactionService.getReoccurring(reoccurring);
+        return tr;
+    }
+    
 }
     
 
