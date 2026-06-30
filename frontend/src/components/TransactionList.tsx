@@ -29,7 +29,7 @@ export default function TransactionList() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h2>Backend Data:</h2>
+      <h2>Transactions:</h2>
       {data.length === 0 ? (
         <p>Connected, but no data found in backend.</p>
       ) : (
