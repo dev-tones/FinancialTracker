@@ -45,7 +45,7 @@ public class TransactionCreateRequest {
     public boolean getReoccurring(){
         return reoccurring;
     }
-    public void setIsReoccurring(boolean isReoccurring){
+    public void setIsReoccurring(boolean reoccurring){
         this.reoccurring = reoccurring;
     }
 }
