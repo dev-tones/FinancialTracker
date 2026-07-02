@@ -1,9 +1,8 @@
 export interface Transaction {
-    id: number,
     amount: number,
     type: string,
-    date: Date,
-    category: number,
+    date: string,
+    categoryId: number,
     description: string,
     reoccurring: boolean,
 }

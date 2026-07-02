@@ -1,7 +1,7 @@
-import { Transaction } from "../types/Transaction";
-import React, { useState, useEffect } from "react";
-function CreateTransactionPage {
-    const [formData, setFormData] = useState({
+import type { Transaction } from "../types/Transaction";
+import { useState } from "react";
+function CreateTransactionPage() {
+    const [formData, setFormData] = useState<Transaction>({
         date: "",
         amount: 0,
         type: "",
@@ -107,3 +107,4 @@ function CreateTransactionPage {
         </form>
     );
 }
+export default CreateTransactionPage;
