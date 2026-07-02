@@ -16,14 +16,17 @@ function CreateTransactionPage() {
     if (loading) return;
     setLoading(true);
     try {
-      const response = await fetch("api/v1/transactions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer + ${localStorage.getItem("token")}`,
+      const response = await fetch(
+        "http://localhost:8080/api/v1/transactions",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer + ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(formData),
         },
-        body: JSON.stringify(formData),
-      });
+      );
       if (!response.ok) {
         throw new Error(`Http error! Status: ${response.status}`);
       }
@@ -99,6 +102,9 @@ function CreateTransactionPage() {
           }
         />
       </label>
+      <button type="submit" disabled={loading}>
+        {loading ? "Submitting..." : "Submit"}
+      </button>
     </form>
   );
 }

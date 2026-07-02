@@ -41,16 +41,6 @@ public class TransactionController {
     public TransactionResponse getTransactionById(@PathVariable Long id) {
        return transactionService.getTransactionById(id);
     }
-
-    @GetMapping("/reoccurring")
-    public List<TransactionResponse> getReoccurring(
-        @RequestParam Long userId,
-        @RequestParam int page,
-        @RequestParam int pageSize
-    ) {
-        List<TransactionResponse> tr = transactionService.getReoccurring(userId, page, pageSize);
-        return tr;
-    }
     
 }
     

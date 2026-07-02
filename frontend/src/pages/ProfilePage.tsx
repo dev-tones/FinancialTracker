@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import type { User } from "../types/User";
 import { useNavigate } from "react-router-dom";
+import CreateTransactionPage from "./CreateTransactionPage";
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -80,6 +81,7 @@ function ProfilePage() {
         </tr>
       </tbody>
       <button onClick={() => navigate("/reoccurring")}>View Reoccurring</button>
+      <CreateTransactionPage />
     </table>
   );
 }
