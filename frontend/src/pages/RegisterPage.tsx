@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import type { Register } from "../types/Register";
 
 function RegisterPage() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState<Register>({
     userName: "",
@@ -16,7 +16,6 @@ function RegisterPage() {
   const navigate = useNavigate();
   const handleSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setError("");
     if (loading) return;
     setLoading(true);
     try {

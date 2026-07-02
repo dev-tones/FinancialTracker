@@ -46,7 +46,6 @@ public class TransactionServiceImpl implements TransactionService {
         return mapToResponse(saved);
     }
 
-
     @Override
     public List<TransactionResponse> getAllTransactions(int page, int pageSize){
 
