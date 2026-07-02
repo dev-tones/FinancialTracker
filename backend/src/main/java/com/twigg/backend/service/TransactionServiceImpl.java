@@ -58,9 +58,19 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<TransactionResponse> getReoccurring(int page, int pageSize){
+    public List<TransactionResponse> getReoccurring(Long userId, int page, int pageSize){
         Pageable pageable = PageRequest.of(page, pageSize);
-        Page<Transaction> transactions = transactionRepository.findByReoccurring(true, pageable);
+        Page<Transaction> transactions = transactionRepository.findByUserIdAndReoccurring(userId, true, pageable);
+        return transactions
+        .stream()
+        .map(this::mapToResponse)
+        .toList();
+    }
+
+    @Override
+    public List<TransactionResponse> getTransactionByUserId(Long userId, int page, int pageSize){
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Transaction> transactions = transactionRepository.findByUserId(userId, pageable);
         return transactions
         .stream()
         .map(this::mapToResponse)

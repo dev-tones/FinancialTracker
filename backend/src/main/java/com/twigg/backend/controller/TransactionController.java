@@ -44,10 +44,11 @@ public class TransactionController {
 
     @GetMapping("/reoccurring")
     public List<TransactionResponse> getReoccurring(
+        @RequestParam Long userId,
         @RequestParam int page,
         @RequestParam int pageSize
     ) {
-        List<TransactionResponse> tr = transactionService.getReoccurring(page, pageSize);
+        List<TransactionResponse> tr = transactionService.getReoccurring(userId, page, pageSize);
         return tr;
     }
     

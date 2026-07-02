@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import type { User } from "../types/User";
+import { useNavigate } from "react-router-dom";
 
 function ProfilePage() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [tableData, setTableData] = useState<User>({
@@ -77,6 +79,7 @@ function ProfilePage() {
           <td> {tableData.phone}</td>
         </tr>
       </tbody>
+      <button onClick={() => navigate("/reoccurring")}>View Reoccurring</button>
     </table>
   );
 }

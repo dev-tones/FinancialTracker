@@ -1,6 +1,8 @@
 package com.twigg.backend.service;
 
 import java.util.List;
+
+
 import com.twigg.backend.dto.TransactionCreateRequest;
 import com.twigg.backend.dto.TransactionResponse;
 
@@ -16,6 +18,7 @@ public interface TransactionService {
 
     public TransactionResponse getTransactionById(Long transactionId);
 
-    public List<TransactionResponse> getReoccurring(int page, int pageSize);
+    public List<TransactionResponse> getReoccurring(Long userId, int page, int pageSize);
 
+    public List<TransactionResponse> getTransactionByUserId(Long userId, int page, int pageSize);
 }
