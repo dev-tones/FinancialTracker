@@ -1,6 +1,8 @@
-import type { Transaction } from "../types/Transaction";
 import { useState } from "react";
+import type { Transaction } from "../types/Transaction";
+import { useAuth } from "../contexts/useAuth";
 function CreateTransactionPage() {
+  const { token } = useAuth();
   const [formData, setFormData] = useState<Transaction>({
     date: "",
     amount: 0,
@@ -22,7 +24,7 @@ function CreateTransactionPage() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer + ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(formData),
         },
@@ -45,10 +47,11 @@ function CreateTransactionPage() {
   if (loading) return <p>Loading profile...</p>;
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Amount of Transaction:
+    <form className="flex flex-col gap-1" onSubmit={handleSubmit}>
+      <label className="flex items-center gap-1">
+        <span className="w-56">Amount of Transaction:</span>
         <input
+          className="w-50 focus:border-indigo-600 border focus:outline-hidden"
           type="number"
           value={formData.amount}
           onChange={(e) =>
@@ -56,25 +59,28 @@ function CreateTransactionPage() {
           }
         />
       </label>
-      <label>
-        Type of Transaction:
+      <label className="flex items-center gap-1">
+        <span className="w-56">Type of Transaction:</span>
         <input
+          className="w-50 focus:border-indigo-600 border focus:outline-hidden"
           type="text"
           value={formData.type}
           onChange={(e) => setFormData({ ...formData, type: e.target.value })}
         />
       </label>
-      <label>
-        Date of Transaction:
+      <label className="flex items-center gap-1">
+        <span className="w-56">Date of Transaction:</span>
         <input
+          className="w-50 focus:border-indigo-600 border focus:outline-hidden"
           type="date"
           value={formData.date}
           onChange={(e) => setFormData({ ...formData, date: e.target.value })}
         />
       </label>
-      <label>
-        Category of Transaction
+      <label className="flex items-center gap-1">
+        <span className="w-56">Category of Transaction:</span>
         <input
+          className="w-50 focus:border-indigo-600 border focus:outline-hidden"
           type="number"
           value={formData.categoryId}
           onChange={(e) =>
@@ -82,9 +88,10 @@ function CreateTransactionPage() {
           }
         />
       </label>
-      <label>
-        Description:
+      <label className="flex items-center gap-1">
+        <span className="w-56">Description:</span>
         <input
+          className="w-50 focus:border-indigo-600 border focus:outline-hidden"
           type="string"
           value={formData.description}
           onChange={(e) =>
@@ -92,9 +99,10 @@ function CreateTransactionPage() {
           }
         />
       </label>
-      <label>
-        Reoccurring:
+      <label className="flex items-center gap-1">
+        <span className="w-56">Reoccurring:</span>
         <input
+          className="w-50 focus:border-indigo-600 border focus:outline-hidden"
           type="checkbox"
           checked={formData.reoccurring}
           onChange={(e) =>
@@ -102,7 +110,11 @@ function CreateTransactionPage() {
           }
         />
       </label>
-      <button type="submit" disabled={loading}>
+      <button
+        className="mx-auto block rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700"
+        type="submit"
+        disabled={loading}
+      >
         {loading ? "Submitting..." : "Submit"}
       </button>
     </form>

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import type { Login } from "../types/Login";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/useAuth";
 
 function LoginPage() {
   const navigate = useNavigate();
+  const { setToken } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState<Login>({
@@ -29,6 +31,7 @@ function LoginPage() {
       const token = await response.text();
       localStorage.setItem("token", token);
       localStorage.setItem("email", formData.email);
+      setToken(token);
       navigate("/profile");
     } catch (err) {
       if (err instanceof Error) {

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import type { Register } from "../types/Register";
 
 function RegisterPage() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState<Register>({
     userName: "",
@@ -44,7 +44,7 @@ function RegisterPage() {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="grid-cols-3 gap-4" onSubmit={handleSubmit}>
       <label>
         User Name:
         <input
