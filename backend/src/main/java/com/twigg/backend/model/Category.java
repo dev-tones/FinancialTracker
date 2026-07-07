@@ -13,7 +13,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name= "category")
 public class Category {
@@ -28,36 +33,15 @@ public class Category {
     @Column(nullable = false)
     private String type;
 
+    @Setter(AccessLevel.NONE)
     @CreationTimestamp
     private OffsetDateTime createdAt;
 
+    @Setter(AccessLevel.NONE)
     @UpdateTimestamp
     private OffsetDateTime updatedAt;
 
     public Category(){
     }
-    public Long getId(){
-        return id;
-    }
-    public void setId(Long id){
-        this.id = id;
-    }
-    public String getName(){
-        return name;
-    }
-    public void setName(String name){
-        this.name = name;
-    }
-    public String getType(){
-        return type;
-    }
-    public void setType(String type){
-        this.type = type;
-    }
-    public OffsetDateTime getCreatedAt(){
-        return createdAt;
-    }
-    public OffsetDateTime getUpdatedAt(){
-        return updatedAt;
-    }
+
 }
