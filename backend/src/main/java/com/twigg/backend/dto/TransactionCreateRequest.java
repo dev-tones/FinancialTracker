@@ -2,50 +2,20 @@ package com.twigg.backend.dto;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.twigg.backend.model.Category;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class TransactionCreateRequest {
     private LocalDate date;
     private BigDecimal amount;
     private String type;
-    private Long categoryId;
+    private Category category;
     private String description;
     private boolean reoccurring;
-
-    public TransactionCreateRequest() {
-    }
-    public LocalDate getDate(){
-        return date;
-    }
-    public void setDate(LocalDate date){
-        this.date = date;
-    }
-    public BigDecimal getAmount(){
-        return amount;
-    }
-    public void setAmount(BigDecimal amount){
-        this.amount = amount;
-    }
-    public String getType(){
-        return type;
-    }
-    public void setType(String type){
-        this.type = type;
-    }
-    public Long getCategoryId(){
-        return categoryId;
-    }
-    public void setCategoryId(Long categoryId){
-        this.categoryId = categoryId;
-    }
-    public String getDescription(){
-        return description;
-    }
-    public void setDescription(String description){
-        this.description = description;
-    }
-    public boolean getReoccurring(){
-        return reoccurring;
-    }
-    public void setIsReoccurring(boolean reoccurring){
-        this.reoccurring = reoccurring;
-    }
 }

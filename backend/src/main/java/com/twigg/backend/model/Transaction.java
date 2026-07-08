@@ -12,8 +12,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter 
+@Setter
 @Entity
 @Table(name = "transaction")
 public class Transaction {
@@ -31,69 +38,24 @@ public class Transaction {
     @Column(nullable = false)
     private LocalDate date;
 
-    @Column(nullable = false)
-    private Long categoryId;
+    @ManyToOne
+    @JoinColumn(name = "category")
+    private Category category;
 
     @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
-    private boolean reoccurring;
+    private Boolean reoccurring;
 
+    @Setter(AccessLevel.NONE)
     @CreationTimestamp
     private OffsetDateTime createdAt;
 
+    @Setter(AccessLevel.NONE)
     @UpdateTimestamp
     private OffsetDateTime updatedAt;
 
     public Transaction(){
-    }
-    public Long getId(){
-        return id;
-    }
-    public void setId(Long id){
-        this.id = id;
-    }
-    public BigDecimal getAmount(){
-        return amount;
-    }
-    public void setAmount(BigDecimal amount){
-        this.amount = amount;
-    }
-    public String getType(){
-        return type;
-    }
-    public void setType(String type){
-        this.type = type;
-    }
-    public LocalDate getDate() {
-        return date;
-    }
-    public void setDate(LocalDate date){
-        this.date = date;
-    }
-    public Long getCategoryId() {
-        return categoryId;
-    }
-    public void setCategoryId(Long categoryId){
-        this.categoryId = categoryId;
-    }
-    public String getDescription(){
-        return description;
-    }
-    public void setDescription(String description){
-        this.description = description;
-    }
-    public Boolean getReoccurring(){
-        return reoccurring;
-    }
-    public void setReoccurring(Boolean reoccurring){
-        this.reoccurring = reoccurring;
-    }
-    public OffsetDateTime getCreatedAt(){
-        return createdAt;
-    }
-    public OffsetDateTime getUpdatedAt(){
-        return updatedAt;
     }
 }

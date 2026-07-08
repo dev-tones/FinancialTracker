@@ -1,21 +1,14 @@
 package com.twigg.backend.dto;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class CategoryCreateRequest {
 
     private String name;
-    private String type;
 
-    public CategoryCreateRequest(){
-    }
-    public String getName(){
-        return name;
-    }
-    public void setName(String name){
-        this.name = name;
-    }
-    public String getType(){
-        return type;
-    }
-    public void setType(String type){
-        this.type = type;
-    }
 }

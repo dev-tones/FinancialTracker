@@ -33,7 +33,7 @@ public class TransactionServiceImpl implements TransactionService {
         tx.setAmount(request.getAmount());
         tx.setDate(request.getDate());
         tx.setType(request.getType());
-        tx.setCategoryId(request.getCategoryId());
+        tx.setCategory(request.getCategory());
         tx.setDescription(request.getDescription());
 
         // 3. Set timestamps
@@ -84,7 +84,7 @@ public class TransactionServiceImpl implements TransactionService {
             transaction.getDate(),
             transaction.getAmount(),
             transaction.getType(),
-            transaction.getCategoryId(),
+            transaction.getCategory(),
             transaction.getDescription(),
             transaction.getReoccurring()
         );
