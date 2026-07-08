@@ -2,7 +2,7 @@ package com.twigg.backend.service;
 
 import java.util.List;
 
-
+import com.twigg.backend.model.Transaction;
 import com.twigg.backend.dto.TransactionCreateRequest;
 import com.twigg.backend.dto.TransactionResponse;
 
@@ -18,4 +18,5 @@ public interface TransactionService {
 
     public TransactionResponse getTransactionById(Long transactionId);
 
+    public List<Transaction> getTransactionByUser();
 }

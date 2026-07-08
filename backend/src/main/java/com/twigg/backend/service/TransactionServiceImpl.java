@@ -1,40 +1,58 @@
 package com.twigg.backend.service;
 
-import com.twigg.backend.repository.TransactionRepository;
+import java.util.List;
+import java.util.NoSuchElementException;
 
-import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import com.twigg.backend.dto.TransactionCreateRequest;
 import com.twigg.backend.dto.TransactionResponse;
+import com.twigg.backend.model.Category;
 import com.twigg.backend.model.Transaction;
+import com.twigg.backend.model.User;
+import com.twigg.backend.repository.CategoryRepository;
+import com.twigg.backend.repository.TransactionRepository;
+import com.twigg.backend.repository.UserRepository;
 
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-import java.util.List;
+import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
 public class TransactionServiceImpl implements TransactionService {
 
     private final TransactionRepository transactionRepository;
+    private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
 
-    public TransactionServiceImpl(TransactionRepository transactionRepository) {
+    public TransactionServiceImpl(TransactionRepository transactionRepository, UserRepository userRepository, CategoryRepository categoryRepository) {
         this.transactionRepository = transactionRepository;
+        this.userRepository = userRepository;
+        this.categoryRepository = categoryRepository;
     }
     @Override
     public TransactionResponse createTransaction(TransactionCreateRequest request){
         // 1. Create entity
         Transaction tx = new Transaction();
 
+        //find user
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("User not found: " + email));
+        tx.setUser(user);
+
+        //find categoryId
+        Category category = categoryRepository.findById(request.getCategoryId()).orElseThrow(() -> new NoSuchElementException("Category not found: " + request.getCategoryId()));
         // 2. Copy DTO -> entity
         //tx.getId();
-        tx.setAmount(request.getAmount());
         tx.setDate(request.getDate());
+        tx.setAmount(request.getAmount());
         tx.setType(request.getType());
-        tx.setCategory(request.getCategory());
+        tx.setCategory(category);
         tx.setDescription(request.getDescription());
+        tx.setReoccurring(request.getReoccurring());
 
         // 3. Set timestamps
         // Hibernate handles setting the timestamps with the model annotations
@@ -44,6 +62,14 @@ public class TransactionServiceImpl implements TransactionService {
 
         // 5. Map to response
         return mapToResponse(saved);
+    }
+
+    @Override
+    public List<Transaction> getTransactionByUser(){
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException("User not found: " + email));
+        List<Transaction> tx = transactionRepository.findByUser(user);
+        return tx;
     }
 
     @Override
@@ -81,6 +107,7 @@ public class TransactionServiceImpl implements TransactionService {
         // return response;
         return new TransactionResponse(
             transaction.getId(),
+            transaction.getUser(),
             transaction.getDate(),
             transaction.getAmount(),
             transaction.getType(),
