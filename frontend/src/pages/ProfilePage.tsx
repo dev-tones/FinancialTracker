@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import type { User } from "../types/User";
 import { useAuth } from "../contexts/useAuth";
+import type { User } from "../types/User";
+import { apiFetch } from "../api/apiClient";
 
 function ProfilePage() {
   const { token } = useAuth();
   const email = localStorage.getItem("email");
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [tableData, setTableData] = useState<User>({
@@ -20,7 +19,6 @@ function ProfilePage() {
     createdAt: "",
     updatedAt: "",
   });
-
   useEffect(() => {
     const fetchUserData = async () => {
       if (!email) {
@@ -30,16 +28,13 @@ function ProfilePage() {
       }
       try {
         setLoading(true);
-        const response = await fetch(
-          `http://localhost:8080/api/v1/user/search?email=${email}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
+        const response = await apiFetch(`/user/search?email=${email}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
-        );
+        });
         if (!response.ok) {
           throw new Error(`HTTP Error! Status: ${response.status}`);
         }
@@ -61,8 +56,8 @@ function ProfilePage() {
   if (loading) return <p>Loading profile...</p>;
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
   return (
-    <>
-      <table className="table-auto">
+    <div className="pt-5">
+      <table className="table-auto border-collapse">
         <tbody>
           <tr>
             <th>Name:</th>
@@ -84,8 +79,7 @@ function ProfilePage() {
           </tr>
         </tbody>
       </table>
-      <button onClick={() => navigate("/create-tx")}>Create Transaction</button>
-    </>
+    </div>
   );
 }
 export default ProfilePage;

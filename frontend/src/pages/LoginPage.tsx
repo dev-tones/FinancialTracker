@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Login } from "../types/Login";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/useAuth";
+import { apiFetch } from "../api/apiClient";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ function LoginPage() {
     if (loading) return;
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/api/v1/auth/login", {
+      const response = await apiFetch("/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
