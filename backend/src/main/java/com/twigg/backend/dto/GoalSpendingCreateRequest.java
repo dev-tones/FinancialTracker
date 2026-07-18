@@ -1,7 +1,7 @@
 package com.twigg.backend.dto;
 
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 
 import com.twigg.backend.model.Category;
 import com.twigg.backend.model.User;
@@ -13,11 +13,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class GoalCreateRequest {
-    private String name;
-    private User user;
+public class GoalSpendingCreateRequest {
+
     private Category category;
-    private BigDecimal amount;
-    private OffsetDateTime startGoal;
-    private OffsetDateTime endGoal;
+    private User user;
+    private BigDecimal targetAmount;
+    private LocalDate startDate;
+    private LocalDate endDate;
+
 }
