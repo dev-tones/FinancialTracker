@@ -8,7 +8,7 @@ import com.twigg.backend.model.Category;
 import com.twigg.backend.model.User;
 
 public record GoalSpendingResponse(
-    Category categoryId,
+    Category category,
     User user,
     BigDecimal targetAmount,
     LocalDate startDate,

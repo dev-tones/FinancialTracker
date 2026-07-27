@@ -1,8 +1,6 @@
 package com.twigg.backend.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,10 +9,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class GoalSavingCreateRequest {
-    private Long userId;
-    private String name;
+public class GoalSpendingProgressResponse {
+
     private BigDecimal targetAmount;
-    private BigDecimal currentAmount;
-    private LocalDate targetDate;
+
+    private BigDecimal amountSpent;
+
+    private BigDecimal amountRemaining;
+
+    private BigDecimal percentageUsed;
+
+    private Long daysRemaining;
 }

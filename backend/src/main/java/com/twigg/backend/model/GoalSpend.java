@@ -8,11 +8,14 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +25,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 @Table(name = "spending_goal")
 public class GoalSpend {
 
@@ -30,11 +34,11 @@ public class GoalSpend {
     private Long id;
 
     @ManyToOne
-    @Column(name = "category_id")
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @ManyToOne
-    @Column(name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     private BigDecimal targetAmount;
@@ -42,9 +46,11 @@ public class GoalSpend {
     private LocalDate endDate;
 
     @CreationTimestamp
+    @Setter(AccessLevel.NONE)
     private OffsetDateTime createdDate;
 
     @UpdateTimestamp
+    @Setter(AccessLevel.NONE)
     private OffsetDateTime updatedDate;
 
 
