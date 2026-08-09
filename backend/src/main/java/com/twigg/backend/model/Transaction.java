@@ -46,6 +46,10 @@ public class Transaction {
     @JoinColumn(name = "category")
     private Category category;
 
+    @ManyToOne
+    @JoinColumn(name = "account")
+    private Account account;
+
     @Column(nullable = false)
     private String description;
 

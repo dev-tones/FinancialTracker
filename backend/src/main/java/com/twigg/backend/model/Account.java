@@ -1,17 +1,14 @@
 package com.twigg.backend.model;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import java.util.List;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,26 +20,22 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "savings_goal")
-public class GoalSave {
-    
+@Table(name = "account")
+public class Account {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    private String name;
-    private BigDecimal targetAmount;
-    private BigDecimal currentAmount;
-    private LocalDate targetDate;
+    @OneToMany(mappedBy = "account")
+    private List<Transaction> transactions;
 
-    @CreationTimestamp
-    private OffsetDateTime createdAt;
 
-    @UpdateTimestamp
-    private OffsetDateTime updatedAt;
 
 }
