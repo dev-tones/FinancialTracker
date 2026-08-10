@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,8 +36,12 @@ public class GoalSave {
     private User user;
 
     private String name;
+
+    @DecimalMin(value = "0.01", message = "Target must be greater than zero.")
     private BigDecimal targetAmount;
+
     private BigDecimal currentAmount;
+    
     private LocalDate targetDate;
 
     @CreationTimestamp

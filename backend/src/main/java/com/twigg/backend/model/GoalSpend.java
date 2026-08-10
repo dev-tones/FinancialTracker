@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -40,8 +41,11 @@ public class GoalSpend {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @DecimalMin(value = "0.01", message = "Target amount must be greater than zero.")
     private BigDecimal targetAmount;
+
     private LocalDate startDate;
+    
     private LocalDate endDate;
 
     @CreationTimestamp
@@ -51,6 +55,5 @@ public class GoalSpend {
     @UpdateTimestamp
     @Setter(AccessLevel.NONE)
     private OffsetDateTime updatedDate;
-
 
 }

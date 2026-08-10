@@ -4,7 +4,6 @@ import java.time.OffsetDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,12 +13,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name= "category")
 public class Category {
 
@@ -27,7 +30,8 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+
+    @Column(nullable = false, length = 50)
     private String name;
 
     @JoinColumn(name = "user_id")
@@ -41,8 +45,5 @@ public class Category {
     @Setter(AccessLevel.NONE)
     @UpdateTimestamp
     private OffsetDateTime updatedAt;
-
-    public Category(){
-    }
 
 }

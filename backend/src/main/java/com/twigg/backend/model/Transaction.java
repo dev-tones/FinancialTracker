@@ -16,12 +16,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter 
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "transaction")
 public class Transaction {
 
@@ -64,6 +68,4 @@ public class Transaction {
     @UpdateTimestamp
     private OffsetDateTime updatedAt;
 
-    public Transaction(){
-    }
 }

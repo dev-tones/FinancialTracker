@@ -44,10 +44,11 @@ function RegisterPage() {
     }
   };
   return (
-    <form className="grid-cols-3 gap-4" onSubmit={handleSubmit}>
-      <label>
-        User Name:
+    <form className="grid grid-cols-6" onSubmit={handleSubmit}>
+      <label className="col-span-4 col-start-2 flex items-center gap-2">
+        <span className="w-32">User Name:</span>
         <input
+          className="shadow-lg hover:bg-slate-200 flex-1"
           type="text"
           value={formData.userName}
           onChange={(e) =>
@@ -55,9 +56,10 @@ function RegisterPage() {
           }
         />
       </label>
-      <label>
-        First Name:
+      <label className="col-span-4 col-start-2 flex items-center gap-2">
+        <span className="w-32">First Name:</span>
         <input
+          className="shadow-lg hover:bg-slate-200 flex-1"
           type="text"
           value={formData.firstName}
           onChange={(e) =>
@@ -65,9 +67,10 @@ function RegisterPage() {
           }
         />
       </label>
-      <label>
-        Last Name:
+      <label className="col-span-4 col-start-2 flex items-center gap-2">
+        <span className="w-32">Last Name:</span>
         <input
+          className="shadow-lg hover:bg-slate-200 flex-1"
           type="text"
           value={formData.lastName}
           onChange={(e) =>
@@ -75,25 +78,28 @@ function RegisterPage() {
           }
         />
       </label>
-      <label>
-        Email:
+      <label className="col-span-4 col-start-2 flex items-center gap-2">
+        <span className="w-32">Email:</span>
         <input
+          className="shadow-lg hover:bg-slate-200 flex-1"
           type="text"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
       </label>
-      <label>
-        Phone:
+      <label className="col-span-4 col-start-2 flex items-center gap-2">
+        <span className="w-32">Phone:</span>
         <input
+          className="shadow-lg hover:bg-slate-200 flex-1"
           type="text"
           value={formData.phone}
           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
         />
       </label>
-      <label>
-        Password:
+      <label className="col-span-4 col-start-2 flex items-center gap-2">
+        <span className="w-32">Password:</span>
         <input
+          className="shadow-lg hover:bg-slate-200 flex-1"
           type="password"
           value={formData.password}
           onChange={(e) =>
@@ -102,7 +108,11 @@ function RegisterPage() {
         />
       </label>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <button type="submit" disabled={loading}>
+      <button
+        className="mt-2 rounded-lg bg-green-300 hover:bg-green-500 col-span-1 col-start-2"
+        type="submit"
+        disabled={loading}
+      >
         {loading ? "Submitting..." : "Submit"}
       </button>
     </form>
