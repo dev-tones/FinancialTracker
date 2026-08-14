@@ -45,18 +45,20 @@ function LoginPage() {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
+    <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
+      <label className="flex flex-col pt-4">
         Email:
         <input
+          className="shadow-lg hover:bg-slate-200 flex-1"
           type="text"
           value={formData.email}
           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         />
       </label>
-      <label>
+      <label className="flex flex-col">
         Password:
         <input
+          className="shadow-lg hover:bg-slate-200 flex-1"
           type="password"
           value={formData.password}
           onChange={(e) =>
@@ -65,7 +67,11 @@ function LoginPage() {
         />
       </label>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <button type="submit" disabled={loading}>
+      <button
+        className="mt-2 rounded-lg shadow-md bg-green-300 px-4 py-2 hover:bg-green-500"
+        type="submit"
+        disabled={loading}
+      >
         {loading ? "Submitting..." : "Submit"}
       </button>
     </form>

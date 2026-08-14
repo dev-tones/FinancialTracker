@@ -13,17 +13,23 @@ function Navbar() {
   }
 
   return (
-    <nav className="flex gap-4 p-4 border-b border-solid">
+    <nav className="flex gap-4 p-4 border-b border-solid bg-green-300">
       {token ? (
         <>
           <Link to="/profile">Profile</Link>
-          <Link to="/create-tx">Create Transaction</Link>
+          <Link to="/create-tx" className="hover:bg-green-500">
+            Create Transaction
+          </Link>
           <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
         <>
-          <Link to="/">Login</Link>
-          <Link to="/register">Register</Link>
+          <Link to="/" className="rounded-md p-2 hover:bg-green-500">
+            Login
+          </Link>
+          <Link to="/register" className="rounded-md p-2 hover:bg-green-500">
+            Register
+          </Link>
         </>
       )}
     </nav>

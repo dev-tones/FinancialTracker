@@ -45,7 +45,7 @@ function RegisterPage() {
   };
   return (
     <form className="grid grid-cols-6" onSubmit={handleSubmit}>
-      <label className="col-span-4 col-start-2 flex items-center gap-2">
+      <label className="col-span-4 pt-4 col-start-2 flex items-center gap-2">
         <span className="w-32">User Name:</span>
         <input
           className="shadow-lg hover:bg-slate-200 flex-1"
@@ -109,7 +109,7 @@ function RegisterPage() {
       </label>
       {error && <p style={{ color: "red" }}>{error}</p>}
       <button
-        className="mt-2 rounded-lg bg-green-300 hover:bg-green-500 col-span-1 col-start-2"
+        className="mt-4 rounded-lg shadow-md bg-green-300 px-4 py-2 hover:bg-green-500 col-span-1 col-start-3"
         type="submit"
         disabled={loading}
       >
