@@ -3,6 +3,17 @@ import type { Login } from "../types/Login";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/useAuth";
 import { apiFetch } from "../api/apiClient";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -45,36 +56,58 @@ function LoginPage() {
     }
   };
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4">
-      <label className="flex flex-col pt-4">
-        Email:
-        <input
-          className="shadow-lg hover:bg-slate-200 flex-1"
-          type="text"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-        />
-      </label>
-      <label className="flex flex-col">
-        Password:
-        <input
-          className="shadow-lg hover:bg-slate-200 flex-1"
-          type="password"
-          value={formData.password}
-          onChange={(e) =>
-            setFormData({ ...formData, password: e.target.value })
-          }
-        />
-      </label>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <button
-        className="mt-2 rounded-lg shadow-md bg-green-300 px-4 py-2 hover:bg-green-500"
-        type="submit"
-        disabled={loading}
-      >
-        {loading ? "Submitting..." : "Submit"}
-      </button>
-    </form>
+    <div className="flex min-h-screen items-center justify-center">
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle>Login to your account</CardTitle>
+          <CardDescription>Enter your email and password</CardDescription>
+        </CardHeader>
+
+        <form onSubmit={handleSubmit}>
+          <CardContent className="grid grid-cols-[100px_1fr] items-center gap-x-4 gap-y-4">
+            <Label htmlFor="email">Email:</Label>
+            <Input
+              id="email"
+              name="email"
+              className="shadow-lg hover:bg-slate-200"
+              type="email"
+              autoComplete="email"
+              required
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+            />
+
+            <Label htmlFor="password">Password:</Label>
+            <Input
+              id="password"
+              name="password"
+              className="shadow-lg hover:bg-slate-200"
+              type="password"
+              autoComplete="current-password"
+              required
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+            />
+          </CardContent>
+
+          <CardFooter className="mt-2 flex flex-col items-center">
+            {error && <p className="text-red-500">{error}</p>}
+
+            <Button
+              className="px-4 py-2 shadow-md"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? "Submitting..." : "Login"}
+            </Button>
+          </CardFooter>
+        </form>
+      </Card>
+    </div>
   );
 }
 export default LoginPage;

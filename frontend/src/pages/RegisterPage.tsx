@@ -1,6 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Register } from "../types/Register";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 function RegisterPage() {
   const [loading, setLoading] = useState(false);
@@ -44,78 +55,111 @@ function RegisterPage() {
     }
   };
   return (
-    <form className="grid grid-cols-6" onSubmit={handleSubmit}>
-      <label className="col-span-4 pt-4 col-start-2 flex items-center gap-2">
-        <span className="w-32">User Name:</span>
-        <input
-          className="shadow-lg hover:bg-slate-200 flex-1"
-          type="text"
-          value={formData.userName}
-          onChange={(e) =>
-            setFormData({ ...formData, userName: e.target.value })
-          }
-        />
-      </label>
-      <label className="col-span-4 col-start-2 flex items-center gap-2">
-        <span className="w-32">First Name:</span>
-        <input
-          className="shadow-lg hover:bg-slate-200 flex-1"
-          type="text"
-          value={formData.firstName}
-          onChange={(e) =>
-            setFormData({ ...formData, firstName: e.target.value })
-          }
-        />
-      </label>
-      <label className="col-span-4 col-start-2 flex items-center gap-2">
-        <span className="w-32">Last Name:</span>
-        <input
-          className="shadow-lg hover:bg-slate-200 flex-1"
-          type="text"
-          value={formData.lastName}
-          onChange={(e) =>
-            setFormData({ ...formData, lastName: e.target.value })
-          }
-        />
-      </label>
-      <label className="col-span-4 col-start-2 flex items-center gap-2">
-        <span className="w-32">Email:</span>
-        <input
-          className="shadow-lg hover:bg-slate-200 flex-1"
-          type="text"
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-        />
-      </label>
-      <label className="col-span-4 col-start-2 flex items-center gap-2">
-        <span className="w-32">Phone:</span>
-        <input
-          className="shadow-lg hover:bg-slate-200 flex-1"
-          type="text"
-          value={formData.phone}
-          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-        />
-      </label>
-      <label className="col-span-4 col-start-2 flex items-center gap-2">
-        <span className="w-32">Password:</span>
-        <input
-          className="shadow-lg hover:bg-slate-200 flex-1"
-          type="password"
-          value={formData.password}
-          onChange={(e) =>
-            setFormData({ ...formData, password: e.target.value })
-          }
-        />
-      </label>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <button
-        className="mt-4 rounded-lg shadow-md bg-green-300 px-4 py-2 hover:bg-green-500 col-span-1 col-start-3"
-        type="submit"
-        disabled={loading}
-      >
-        {loading ? "Submitting..." : "Submit"}
-      </button>
-    </form>
+    <div className="flex min-h-screen items-center justify-center">
+      <Card className="w-full max-w-sm">
+        <CardHeader>
+          <CardTitle>Register for an account</CardTitle>
+          <CardDescription>
+            Enter your information below to create your account
+          </CardDescription>
+        </CardHeader>
+
+        <form onSubmit={handleSubmit}>
+          <CardContent className="grid grid-cols-[100px_1fr] items-center gap-x-4 gap-y-4">
+            <Label htmlFor="userName">User Name:</Label>
+            <Input
+              id="userName"
+              name="userName"
+              type="text"
+              autoComplete="username"
+              required
+              className="shadow-lg hover:bg-slate-200"
+              value={formData.userName}
+              onChange={(e) =>
+                setFormData({ ...formData, userName: e.target.value })
+              }
+            />
+
+            <Label htmlFor="firstName">First Name:</Label>
+            <Input
+              id="firstName"
+              name="firstName"
+              type="text"
+              autoComplete="given-name"
+              required
+              className="shadow-lg hover:bg-slate-200"
+              value={formData.firstName}
+              onChange={(e) =>
+                setFormData({ ...formData, firstName: e.target.value })
+              }
+            />
+
+            <Label htmlFor="lastName">Last Name:</Label>
+            <Input
+              id="lastName"
+              name="lastName"
+              type="text"
+              autoComplete="family-name"
+              required
+              className="shadow-lg hover:bg-slate-200"
+              value={formData.lastName}
+              onChange={(e) =>
+                setFormData({ ...formData, lastName: e.target.value })
+              }
+            />
+
+            <Label htmlFor="email">Email:</Label>
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              className="shadow-lg hover:bg-slate-200"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+            />
+
+            <Label htmlFor="phone">Phone:</Label>
+            <Input
+              id="phone"
+              name="phone"
+              type="tel"
+              autoComplete="tel"
+              className="shadow-lg hover:bg-slate-200"
+              value={formData.phone}
+              onChange={(e) =>
+                setFormData({ ...formData, phone: e.target.value })
+              }
+            />
+
+            <Label htmlFor="password">Password:</Label>
+            <Input
+              id="password"
+              name="password"
+              type="password"
+              autoComplete="new-password"
+              required
+              className="shadow-lg hover:bg-slate-200"
+              value={formData.password}
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
+            />
+          </CardContent>
+
+          <CardFooter className="mt-2 flex flex-col items-center gap-2">
+            {error && <p className="text-sm text-red-500">{error}</p>}
+
+            <Button className="shadow-md" type="submit" disabled={loading}>
+              {loading ? "Submitting..." : "Register"}
+            </Button>
+          </CardFooter>
+        </form>
+      </Card>
+    </div>
   );
 }
 export default RegisterPage;

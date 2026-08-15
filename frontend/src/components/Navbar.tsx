@@ -13,21 +13,19 @@ function Navbar() {
   }
 
   return (
-    <nav className="flex gap-4 p-4 border-b border-solid bg-green-300">
+    <nav className="flex gap-4 p-4 border-b border-solid">
       {token ? (
         <>
           <Link to="/profile">Profile</Link>
-          <Link to="/create-tx" className="hover:bg-green-500">
-            Create Transaction
-          </Link>
+          <Link to="/create-tx">Create Transaction</Link>
           <button onClick={handleLogout}>Logout</button>
         </>
       ) : (
         <>
-          <Link to="/" className="rounded-md p-2 hover:bg-green-500">
+          <Link to="/" className="rounded-md p-2">
             Login
           </Link>
-          <Link to="/register" className="rounded-md p-2 hover:bg-green-500">
+          <Link to="/register" className="rounded-md p-2">
             Register
           </Link>
         </>
