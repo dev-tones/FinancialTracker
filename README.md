@@ -28,6 +28,7 @@ Frontend:
 - React
 - Vite
 - TypeScript
+- Shadcn
 
 ---
 
@@ -93,6 +94,8 @@ Context path (from application.properties):
     server.servlet.context-path=/api/v1
 
 All routes are prefixed with /api/v1.
+
+PostgreSql Database: locally stored for persistence 
 
 ---
 
