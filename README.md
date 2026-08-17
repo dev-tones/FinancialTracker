@@ -161,7 +161,11 @@ If none exist:
 
 From the backend folder:
 
-    mvn spring-boot:run
+    # With Postgres
+    ./mvnw spring-boot:run -Dspring-boot.run.profiles=db
+
+    # Without (H2 in-memory)
+    ./mvnw spring-boot:run -Dspring-boot.run.profiles=nodb
 
 Backend will run at:
 
