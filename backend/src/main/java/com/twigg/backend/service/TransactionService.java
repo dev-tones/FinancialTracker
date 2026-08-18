@@ -1,10 +1,11 @@
 package com.twigg.backend.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-import com.twigg.backend.model.Transaction;
 import com.twigg.backend.dto.TransactionCreateRequest;
 import com.twigg.backend.dto.TransactionResponse;
+import com.twigg.backend.model.Transaction;
 
 public interface TransactionService {
 
@@ -19,4 +20,6 @@ public interface TransactionService {
     public TransactionResponse getTransactionById(Long transactionId);
 
     public List<Transaction> getTransactionByUser();
+
+    public BigDecimal getTotalTransactionAmount();
 }
