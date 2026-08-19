@@ -20,7 +20,6 @@ function ProfilePage() {
   const [tableData, setTableData] = useState<User>({
     id: 0,
     userRole: "",
-    // userName: "",
     firstName: "",
     lastName: "",
     email: "",

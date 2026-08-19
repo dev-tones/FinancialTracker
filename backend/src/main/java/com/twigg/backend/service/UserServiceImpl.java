@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService {
     
     public UserResponse createUser(UserCreateRequest request){
         User u = new User();
-        // u.setUserName(request.getUserName());
         u.setUserRole(UserRole.USER);
         u.setFirstName(request.getFirstName());
         u.setLastName(request.getLastName());
@@ -84,7 +83,6 @@ public class UserServiceImpl implements UserService {
         return new UserResponse(
             user.getId(),
             user.getUserRole(),
-            // user.getUserName(),
             user.getFirstName(),
             user.getLastName(),
             user.getEmail(),

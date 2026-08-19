@@ -18,7 +18,6 @@ function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState<Register>({
-    // userName: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -31,16 +30,13 @@ function RegisterPage() {
     if (loading) return;
     setLoading(true);
     try {
-      const response = await apiFetch(
-        "/auth/register",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
+      const response = await apiFetch("/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify(formData),
+      });
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -67,20 +63,6 @@ function RegisterPage() {
 
         <form onSubmit={handleSubmit}>
           <CardContent className="grid grid-cols-[100px_1fr] items-center gap-x-4 gap-y-4">
-            {/* <Label htmlFor="userName">User Name:</Label>
-            <Input
-              id="userName"
-              name="userName"
-              type="text"
-              autoComplete="username"
-              required
-              className="shadow-lg hover:bg-slate-200"
-              value={formData.userName}
-              onChange={(e) =>
-                setFormData({ ...formData, userName: e.target.value })
-              }
-            /> */}
-
             <Label htmlFor="firstName">First Name:</Label>
             <Input
               id="firstName"
