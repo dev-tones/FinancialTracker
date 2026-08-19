@@ -6,7 +6,7 @@ export function ProtectedRoute({ children }: { children: ReactNode }) {
   const { token } = useAuth();
 
   if (!token) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
   return children;
 }

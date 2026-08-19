@@ -26,6 +26,8 @@ function AppSidebar() {
   const { token, setToken } = useAuth();
   const navigate = useNavigate();
 
+  console.log("SIDEBAR TOKEN:", token);
+
   function handleLogout() {
     localStorage.removeItem("token");
     localStorage.removeItem("email");

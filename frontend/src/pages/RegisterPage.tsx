@@ -44,7 +44,7 @@ function RegisterPage() {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      navigate("/login");
+      navigate("/");
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
@@ -57,7 +57,7 @@ function RegisterPage() {
   };
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <Card className="w-full max-w-sm">
+      <Card className="shadow-2xl w-full max-w-sm">
         <CardHeader>
           <CardTitle>Register for an account</CardTitle>
           <CardDescription>

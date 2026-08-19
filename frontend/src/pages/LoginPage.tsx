@@ -41,6 +41,8 @@ function LoginPage() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const token = await response.text();
+      console.log("LOGIN TOKEN:", token);
+
       localStorage.setItem("token", token);
       localStorage.setItem("email", formData.email);
       setToken(token);
@@ -57,7 +59,7 @@ function LoginPage() {
   };
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <Card className="w-full max-w-sm">
+      <Card className="shadow-2xl w-full max-w-sm">
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
           <CardDescription>Enter your email and password</CardDescription>

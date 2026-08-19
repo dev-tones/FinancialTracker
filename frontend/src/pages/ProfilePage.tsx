@@ -2,6 +2,15 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/useAuth";
 import type { User } from "../types/User";
 import { apiFetch } from "../api/apiClient";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 function ProfilePage() {
   const { token } = useAuth();
@@ -56,30 +65,27 @@ function ProfilePage() {
   if (loading) return <p>Loading profile...</p>;
   if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
   return (
-    <div className="pt-5">
-      <table className="table-auto border-collapse">
-        <tbody>
-          <tr>
-            <th>Name:</th>
-            <td>
-              {tableData.firstName} {tableData.lastName}
-            </td>
-          </tr>
-          <tr>
-            <th>Role:</th>
-            <td> {tableData.userRole}</td>
-          </tr>
-          <tr>
-            <th>Email:</th>
-            <td> {tableData.email}</td>
-          </tr>
-          <tr>
-            <th>Phone:</th>
-            <td> {tableData.phone}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <Table>
+      <TableCaption>Profile</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Name</TableHead>
+          <TableHead>Role</TableHead>
+          <TableHead>Email</TableHead>
+          <TableHead>Phone</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>
+            {tableData.firstName} {tableData.lastName}
+          </TableCell>
+          <TableCell>{tableData.userRole}</TableCell>
+          <TableCell>{tableData.email}</TableCell>
+          <TableCell>{tableData.phone}</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
   );
 }
 export default ProfilePage;
