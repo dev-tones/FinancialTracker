@@ -40,9 +40,6 @@ public class User {
     @Column(nullable = false)
     private UserRole userRole;
 
-    @Column(unique = true, nullable = false)
-    private String userName;
-
     @Column(nullable = false)
     private String firstName;
 

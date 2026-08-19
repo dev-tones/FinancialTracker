@@ -8,7 +8,6 @@ public record UserResponse (
     
     Long id,
     UserRole userRole,
-    String userName,
     String firstName,
     String lastName,
     String email,

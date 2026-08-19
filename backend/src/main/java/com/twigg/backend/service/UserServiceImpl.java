@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     
     public UserResponse createUser(UserCreateRequest request){
         User u = new User();
-        u.setUserName(request.getUserName());
+        // u.setUserName(request.getUserName());
         u.setUserRole(UserRole.USER);
         u.setFirstName(request.getFirstName());
         u.setLastName(request.getLastName());
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 
     public UserResponse updateUser(Long id, UserUpdateRequest request){
         User u = userRepository.findById(id).orElseThrow(() -> new NoSuchElementException("User not found. "));
-        u.setUserName(request.getUserName());
+        // u.setUserName(request.getUserName());
         u.setFirstName(request.getFirstName());
         u.setLastName(request.getLastName());
         u.setEmail(request.getEmail());
@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
         return new UserResponse(
             user.getId(),
             user.getUserRole(),
-            user.getUserName(),
+            // user.getUserName(),
             user.getFirstName(),
             user.getLastName(),
             user.getEmail(),

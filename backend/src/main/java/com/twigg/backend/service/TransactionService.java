@@ -9,10 +9,6 @@ import com.twigg.backend.model.Transaction;
 
 public interface TransactionService {
 
-    // public List<TransactionResponse> createTransaction(CreateTransactionRequest request);
-
-    // public List<TransactionResponse> getAllTransactions();
-
     public TransactionResponse createTransaction(TransactionCreateRequest request);
 
     public List<TransactionResponse> getAllTransactions(int page, int pageSize);

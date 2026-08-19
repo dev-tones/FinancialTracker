@@ -12,12 +12,13 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { apiFetch } from "@/api/apiClient";
 
 function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState<Register>({
-    userName: "",
+    // userName: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -30,8 +31,8 @@ function RegisterPage() {
     if (loading) return;
     setLoading(true);
     try {
-      const response = await fetch(
-        "http://localhost:8080/api/v1/auth/register",
+      const response = await apiFetch(
+        "/auth/register",
         {
           method: "POST",
           headers: {
@@ -66,7 +67,7 @@ function RegisterPage() {
 
         <form onSubmit={handleSubmit}>
           <CardContent className="grid grid-cols-[100px_1fr] items-center gap-x-4 gap-y-4">
-            <Label htmlFor="userName">User Name:</Label>
+            {/* <Label htmlFor="userName">User Name:</Label>
             <Input
               id="userName"
               name="userName"
@@ -78,7 +79,7 @@ function RegisterPage() {
               onChange={(e) =>
                 setFormData({ ...formData, userName: e.target.value })
               }
-            />
+            /> */}
 
             <Label htmlFor="firstName">First Name:</Label>
             <Input

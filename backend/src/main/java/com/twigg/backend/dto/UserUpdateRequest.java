@@ -7,27 +7,20 @@ import jakarta.validation.constraints.Size;
 
 public class UserUpdateRequest {
 
-  
-    private String userName;
-
     private UserRole userRole;
    
     private String firstName;
   
     private String lastName;
+
     @Size(min=8, message="Password must be at least 8 characters.")
     private String password;
+
     @Email(message="Please provide a valid email address.")
     private String email;
     
     private String phone;
 
-    public String getUserName(){
-        return userName;
-    }
-    public void setUserName(String userName){
-        this.userName = userName;
-    }
     public UserRole getUserRole(){
         return userRole;
     }
